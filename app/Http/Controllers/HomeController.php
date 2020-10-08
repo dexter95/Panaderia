@@ -32,22 +32,26 @@ class HomeController extends Controller
     }
 
 
-        public function facturas($miItem)
+        public function facturas($miItem,$num)
         {
-
-            $array = json_decode($miItem);
             DB::table('facturas')->insert([
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
 
-            DB::table('_dfacturas')->insert([
-                'id_producto' => $array['id_producto'],
-                'cantidad' => $array->cantidad,
-                'precio' => $array['precio'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+
+            foreach($miItem as $f){
+                 DB::updateOrCreate([
+                    'id_producto' => $miItem->id_producto,
+                    'cantidad' => $num,
+                    'precio' => $miItem->precio,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+
+                ]);
+            }
+
+
 
             return redirect()->route('home');
         }

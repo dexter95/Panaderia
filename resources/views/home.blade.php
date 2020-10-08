@@ -75,17 +75,19 @@
                     return itemBaseDatos['id_producto'] == item;
                 });
 
-                    $.ajax({
-                        url:'{{ route("fac") }}',
-                        data: JSON.stringify(miItem),
-                        type: 'POST',
-                    });
+
                 // Cuenta el número de veces que se repite el producto
                 let numeroUnidadesItem = carrito.reduce(function (total, itemId) {
 
                     return itemId === item ? total += 1 : total;
 
                 }, 0);
+
+                $.ajax({
+                    url:'{{ route("fac") }}',
+                    data: JSON.stringify(miItem),numeroUnidadesItem,
+                    type: 'post',
+                });
 
                 // Creamos el nodo del item del carrito
                 let miNodo = document.createElement('li');
@@ -172,7 +174,10 @@
                 <!-- Precio total -->
                 <p class="text-right">Total: $<span id="total"></span></p>
                 <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-                <a href="{{ route('fac') }}" class="btn btn-info">Facturar</a>
+                <form action="{{ route('fac') }}" method="post">
+                    @csrf
+                    <button class="btn btn-info">Facturar</button>
+                </form>
 
             </aside>
         </div>

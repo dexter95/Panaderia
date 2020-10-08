@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/factura/{add?}', 'HomeController@facturas')->name('fac');
+Route::post('/factura/{item?}/{unidades?}', 'HomeController@facturas')->name('fac');
 Route::get('/add/{id}', 'HomeController@add')->name('add');
 
 
