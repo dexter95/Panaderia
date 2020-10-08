@@ -61,6 +61,7 @@ class LoginController extends Controller
         {
             if(Auth::user()->id_rol == 1)
             {
+
                         /*al ingresar se cargara una alerta de Bienvenida*/
                     Alert()->success('Panaderia Fe en Jesus' ,'Bienvenido'." ". $input["username"]);
                     /*redirecciona a la vista al ingresar al sistema*/
